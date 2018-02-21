@@ -8,7 +8,7 @@ class Random:
         return r
 
     def choose(self, objects):
-        i = next() % len(objects)
+        i = self.next() % len(objects)
         return objects[i]
 
 
@@ -24,17 +24,26 @@ class Grammar:
         else:
             self.d[left] = right
 
-    def generate(self, strings):
+    def generate(self):
+        if 'Start' in self.d:
+            return self.generating(self.d['Start'])
+        else:
+            return None
+
+    def generating(self, strings):
         o = ''
         for s in strings:
             if s not in self.d:
+                print("Found it")
                 o += s
                 o += ' '
             else:
-                return self.generate(self.r.choose(self.d[s]))
+                print("Didn't find it")
+                o += self.generating(self.r.choose(self.d[s]))
+        return o
 
 
-G = Grammar(101)
+G = Grammar(105)
 G.rule('Noun',   ('cat',))                                #  01
 G.rule('Noun',   ('boy',))                                #  02
 G.rule('Noun',   ('dog',))                                #  03
@@ -46,4 +55,4 @@ G.rule('Phrase', ('the', 'Noun', 'Verb', 'the', 'Noun'))  #  08
 G.rule('Story',  ('Phrase',))                             #  09
 G.rule('Story',  ('Phrase', 'and', 'Story'))              #  10
 G.rule('Start',  ('Story', '.'))                          #  11
-n = Random(4999)
+print(G.generate())
