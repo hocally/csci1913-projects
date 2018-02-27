@@ -1,10 +1,10 @@
 class Random:
     def __init__(self, seed):
-        self.n = seed
+        self.num = seed
 
     def next(self):
-        r = (7^5 * self.n) % (2^31 - 1)
-        self.n += 1
+        r = (16807 * self.num) % 2147483647
+        self.num = r
         return r
 
     def choose(self, objects):
@@ -14,45 +14,79 @@ class Random:
 
 class Grammar:
     def __init__(self, seed):
-        self.d = {}
-        self.r = Random(seed)
+        self.dictionary = {}
+        self.random = Random(seed)
 
     def rule(self, left, right):
-        if left in self.d:
-            temp = self.d[left]
-            self.d[left] = temp + right
+        if left in self.dictionary:
+            temp = self.dictionary[left]
+            self.dictionary[left] = temp + (right,)
         else:
-            self.d[left] = right
+            self.dictionary[left] = (right,)
 
     def generate(self):
-        if 'Start' in self.d:
-            return self.generating(self.d['Start'])
-        else:
-            return None
+        return self.generating(('Start',))
 
     def generating(self, strings):
-        o = ''
+        output = ''
         for s in strings:
-            if s not in self.d:
-                print("Found it")
-                o += s
-                o += ' '
+            if s not in self.dictionary:
+                output += s
+                output += ' '
             else:
-                print("Didn't find it")
-                o += self.generating(self.r.choose(self.d[s]))
-        return o
+                output += self.generating(self.random.choose(self.dictionary[s]))
+        return output
 
 
-G = Grammar(105)
-G.rule('Noun',   ('cat',))                                #  01
-G.rule('Noun',   ('boy',))                                #  02
-G.rule('Noun',   ('dog',))                                #  03
-G.rule('Noun',   ('girl',))                               #  04
-G.rule('Verb',   ('bit',))                                #  05
-G.rule('Verb',   ('chased',))                             #  06
-G.rule('Verb',   ('kissed',))                             #  07
-G.rule('Phrase', ('the', 'Noun', 'Verb', 'the', 'Noun'))  #  08
-G.rule('Story',  ('Phrase',))                             #  09
-G.rule('Story',  ('Phrase', 'and', 'Story'))              #  10
-G.rule('Start',  ('Story', '.'))                          #  11
+G = Grammar(101)
+print('Story 1')
+G.rule('Noun',   ('cat',))
+G.rule('Noun',   ('boy',))
+G.rule('Noun',   ('dog',))
+G.rule('Noun',   ('girl',))
+G.rule('Verb',   ('bit',))
+G.rule('Verb',   ('chased',))
+G.rule('Verb',   ('kissed',))
+G.rule('Phrase', ('the', 'Noun', 'Verb', 'the', 'Noun'))
+G.rule('Story',  ('Phrase',))
+G.rule('Story',  ('Phrase', 'and', 'Story'))
+G.rule('Start',  ('Story', '.'))
 print(G.generate())
+print(G.generate())
+print(G.generate())
+print(G.generate())
+
+H = Grammar(101)
+print('\nStory 2')
+H.rule('Noun',   ('apple',))
+H.rule('Noun',   ('banana',))
+H.rule('Noun',   ('man',))
+H.rule('Noun',   ('woman',))
+H.rule('Verb',   ('ate',))
+H.rule('Verb',   ('threw',))
+H.rule('Verb',   ('helped',))
+H.rule('Phrase', ('the', 'Noun', 'Verb', 'the', 'Noun', 'and', 'Noun'))
+H.rule('Story',  ('Phrase',))
+H.rule('Story',  ('Phrase', 'and', 'Story'))
+H.rule('Start',  ('Story', '.'))
+print(H.generate())
+print(H.generate())
+print(H.generate())
+print(H.generate())
+
+I = Grammar(101)
+print('\nStory 3')
+I.rule('Noun',   ('apple',))
+I.rule('Noun',   ('banana',))
+I.rule('Noun',   ('man',))
+I.rule('Noun',   ('woman',))
+I.rule('Verb',   ('ate',))
+I.rule('Verb',   ('threw',))
+I.rule('Verb',   ('helped',))
+I.rule('Phrase', ('the', 'Noun', 'Verb', 'the', 'Noun'))
+I.rule('Story',  ('Phrase',))
+I.rule('Start',  ('Either', 'Phrase', 'and', 'Story', 'or', 'Phrase', 'and', 'Story', '.'))
+print(I.generate())
+print(I.generate())
+print(I.generate())
+print(I.generate())
