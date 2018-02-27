@@ -1,3 +1,12 @@
+'''
+Project 1
+Henry O'Callaghan
+CSci 1913
+Spring 2018
+Lab section 4
+'''
+
+
 class Random:
     def __init__(self, seed):
         self.num = seed
@@ -25,7 +34,10 @@ class Grammar:
             self.dictionary[left] = (right,)
 
     def generate(self):
-        return self.generating(('Start',))
+        if 'Start' in self.dictionary:
+            return self.generating(('Start',))
+        else:
+            raise RuntimeError
 
     def generating(self, strings):
         output = ''
@@ -37,7 +49,7 @@ class Grammar:
                 output += self.generating(self.random.choose(self.dictionary[s]))
         return output
 
-
+'''
 G = Grammar(101)
 print('Story 1')
 G.rule('Noun',   ('cat',))
@@ -65,28 +77,11 @@ H.rule('Noun',   ('woman',))
 H.rule('Verb',   ('ate',))
 H.rule('Verb',   ('threw',))
 H.rule('Verb',   ('helped',))
-H.rule('Phrase', ('the', 'Noun', 'Verb', 'the', 'Noun', 'and', 'Noun'))
+H.rule('Phrase', ('the', 'Noun', 'Verb', 'the', 'Noun'))
 H.rule('Story',  ('Phrase',))
-H.rule('Story',  ('Phrase', 'and', 'Story'))
-H.rule('Start',  ('Story', '.'))
+H.rule('Start',  ('Either', 'Phrase', 'and', 'Story', 'or', 'Phrase', 'and', 'Story', '.'))
 print(H.generate())
 print(H.generate())
 print(H.generate())
 print(H.generate())
-
-I = Grammar(101)
-print('\nStory 3')
-I.rule('Noun',   ('apple',))
-I.rule('Noun',   ('banana',))
-I.rule('Noun',   ('man',))
-I.rule('Noun',   ('woman',))
-I.rule('Verb',   ('ate',))
-I.rule('Verb',   ('threw',))
-I.rule('Verb',   ('helped',))
-I.rule('Phrase', ('the', 'Noun', 'Verb', 'the', 'Noun'))
-I.rule('Story',  ('Phrase',))
-I.rule('Start',  ('Either', 'Phrase', 'and', 'Story', 'or', 'Phrase', 'and', 'Story', '.'))
-print(I.generate())
-print(I.generate())
-print(I.generate())
-print(I.generate())
+'''
