@@ -33,7 +33,7 @@ public class Tableau {
             }
             deck = new Deck();
             deck.shuffle();
-            for (int i = 1; i < 14; i++) {
+            for (int i = 1; i < piles.length; i++) {
                 for (int j = 0; j < 4; j++) {
                     piles[i].add(deck.deal());
                 }

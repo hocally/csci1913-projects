@@ -8,9 +8,11 @@ public class Deck {
     public Deck() {
         count = 0;
         deck = new Card[52];
-        for(int i = 0; i < deck.length; i++) {
-            deck[i] = new Card(Math.abs(rand.nextInt()) % 13 + 1);
-            count++;
+        for(int i = 1; i <= 13; i++) {
+            for(int j = 0; j < 4; j++) {
+                deck[count] = new Card(i);
+                count++;
+            }
         }
     }
 

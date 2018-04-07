@@ -1,0 +1,720 @@
+
+<!-- saved from url=(0087)https://ay17.moodle.umn.edu/pluginfile.php/2246746/mod_resource/content/2/project2.html -->
+<html class="gr__ay17_moodle_umn_edu"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>
+   CSci 1913 Programming Project 2
+  </title>
+  <style>
+   a:active
+    { color: purple;
+      font-weight: bold;
+      text-decoration: none }
+   a:link
+    { color: blue;
+      font-weight: bold;
+      text-decoration: none }
+   a:visited
+    { color: purple;
+      font-weight: bold;
+      text-decoration: none }
+   hr
+    { background-color: black; 
+      border: none;
+      color: black;
+      height: 1px }
+   table
+    { border-collapse: collapse }
+  </style>
+ <style>	
+	@font-face {
+
+		font-family: 'Mtga-Extension-Comic-Sans';
+		src: url( 'chrome-extension://iopebbikefjcknnbmdkkcebchlnaioen/css/font4.ttf' );
+
+	}
+
+	.tweet[data-user-id='25073877'] .tweet-text,
+	.tweet[data-user-id='822215679726100480'] .tweet-text,
+	.QuoteTweet-innerContainer[data-user-id='25073877'] .tweet-text,
+	.QuoteTweet-innerContainer[data-user-id='822215679726100480'] .tweet-text{
+
+		font-family: 'Mtga-Extension-Comic-Sans';
+		font-size: 2em;
+		line-height: 24px;
+		letter-spacing: 2px;
+		margin-top: 12px;
+	
+	}
+
+	twitterwidget /deep/ .EmbeddedTweet[data-click-to-open-target*='https://twitter.com/realDonaldTrump/'] .Tweet-text,
+	twitterwidget /deep/ .EmbeddedTweet[data-click-to-open-target*='https://twitter.com/POTUS/'] .Tweet-text{
+
+		font-family: 'Mtga-Extension-Comic-Sans';
+		font-size: 2em;
+		line-height: 24px;
+		letter-spacing: 2px;
+		margin-top: 12px;
+
+	}
+
+	.EmbeddedTweet[data-click-to-open-target*='https://twitter.com/realDonaldTrump/'] .Tweet-text,
+	.EmbeddedTweet[data-click-to-open-target*='https://twitter.com/POTUS/'] .Tweet-text{
+
+		font-family: 'Mtga-Extension-Comic-Sans';
+		font-size: 2em;
+		line-height: 24px;
+		letter-spacing: 2px;
+		margin-top: 12px;
+
+	}
+
+	.mytweetclass {
+		font-family: 'Mtga-Extension-Comic-Sans';
+		font-size: 2em;
+		line-height: 24px;
+		letter-spacing: 2px;
+		margin-top: 12px;
+	}</style></head>
+ <body bgcolor="#FFFFFF" data-gr-c-s-loaded="true">
+  <p align="center">
+   <b>Programming Project 2</b>
+   <br>
+   <b>CS<small>CI</small> 1913: Introduction to Algorithms,</b>
+   <br>
+   <b>Data Structures, and Program Development</b>
+   <br>
+   <b>April 4, 2018</b>
+  </p>
+  <p>
+   <b>0. Introduction.</b>
+  </p>
+  <p align="justify">
+   <i>Perditio Tempus</i> (pronounced
+   <i>per-<small>DISH</small>-ee-oh <small>TEM</small>-pus</i>)
+   is a solitaire game played with a deck of cards. Its name means
+   ‘‘a waste of time’’ in Latin. In this project, you
+   will write a Java program that plays Perditio Tempus. Despite the name, this
+   program may still be interesting because it demonstrates some things about
+   how stacks work. Also, if you have a program that plays Perditio Tempus,
+   then you need not waste time playing it yourself.
+  </p>
+  <p>
+   <b>1. Theory.</b>
+  </p>
+  <p align="justify">
+   A standard <i>deck</i> has 52 <i>cards.</i> Each card has one of
+   four <i>suits,</i> called <i>spade, club, heart,</i> and
+   <i>diamond,</i> but suits are not used in Perditio Tempus. Each card
+   also has one of thirteen <i>ranks</i>, called <i>ace, two, three,
+   four, five, six, seven, eight, nine, ten, jack, queen,</i> and
+   <i>king.</i> These ranks correspond to the numbers 1 through 13,
+   respectively.
+   <br>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Perditio Tempus is played in the following
+   way. You shuffle the deck, and the deal the cards face-down into a row of
+   thirteen <i>piles,</i> with four cards in each pile. The row of piles
+   is called the <i>tableau</i> (pronounced
+   <i>tab</i>-<small><i>LOW</i></small>). The piles are numbered
+   from 1 to 13, so that each pile corresponds to a card rank. Play now
+   proceeds according to the following rules.
+  </p>
+  <ol>
+   <li>
+   <p align="justify">
+    Set the variable <i>p</i> to 1.
+   </p>
+   </li><li>
+   <p align="justify">
+    If pile number <i>p</i> is empty, then go to step 4.
+   </p>
+   </li><li>
+   <p align="justify">
+    Turn over the card from the top of pile number <i>p.</i> Reset
+    <i>p</i> to the number given by the card’s rank. Throw the card
+    away. Go to step 2.
+   </p>
+   </li><li>
+   <p align="justify">
+    If all piles are empty, then you have won. If some pile is not empty, then
+    you have lost.
+   </p>
+  </li></ol>
+  <p align="justify">
+   You can use arrays and stacks to play Perditio Tempus. The shuffled deck of
+   cards, before it has been dealt into the tableau, can be represented as an
+   array stack. The tableau itself can be represented as an array of piles.
+   Each pile in the array can be represented as a linked stack.
+  </p>
+  <p>
+   <b>2. Example.</b>
+  </p>
+  <p align="justify">
+   Here is an example game of Perditio Tempus, shown step by step. This game
+   was played automatically by a version of the program you are asked to write
+   for this assignment. It assumes that the deck has been shuffled and dealt to
+   form the tableau.
+  </p>
+  <blockquote>
+   <p>
+    <tt>Got&nbsp;five&nbsp;from&nbsp;pile&nbsp;1.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;queen&nbsp;from&nbsp;pile&nbsp;5.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;six&nbsp;from&nbsp;pile&nbsp;12.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;two&nbsp;from&nbsp;pile&nbsp;6.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;two&nbsp;from&nbsp;pile&nbsp;2.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;six&nbsp;from&nbsp;pile&nbsp;2.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;six&nbsp;from&nbsp;pile&nbsp;6.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;nine&nbsp;from&nbsp;pile&nbsp;6.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;four&nbsp;from&nbsp;pile&nbsp;9.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;six&nbsp;from&nbsp;pile&nbsp;4.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;three&nbsp;from&nbsp;pile&nbsp;6.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;nine&nbsp;from&nbsp;pile&nbsp;3.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;seven&nbsp;from&nbsp;pile&nbsp;9.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;ten&nbsp;from&nbsp;pile&nbsp;7.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;jack&nbsp;from&nbsp;pile&nbsp;10.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;five&nbsp;from&nbsp;pile&nbsp;11.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;king&nbsp;from&nbsp;pile&nbsp;5.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;ace&nbsp;from&nbsp;pile&nbsp;13.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;queen&nbsp;from&nbsp;pile&nbsp;1.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;eight&nbsp;from&nbsp;pile&nbsp;12.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;seven&nbsp;from&nbsp;pile&nbsp;8.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;three&nbsp;from&nbsp;pile&nbsp;7.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;nine&nbsp;from&nbsp;pile&nbsp;3.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;two&nbsp;from&nbsp;pile&nbsp;9.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;king&nbsp;from&nbsp;pile&nbsp;2.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;ten&nbsp;from&nbsp;pile&nbsp;13.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;jack&nbsp;from&nbsp;pile&nbsp;10.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;four&nbsp;from&nbsp;pile&nbsp;11.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;three&nbsp;from&nbsp;pile&nbsp;4.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;queen&nbsp;from&nbsp;pile&nbsp;3.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;jack&nbsp;from&nbsp;pile&nbsp;12.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;king&nbsp;from&nbsp;pile&nbsp;11.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;jack&nbsp;from&nbsp;pile&nbsp;13.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;four&nbsp;from&nbsp;pile&nbsp;11.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;five&nbsp;from&nbsp;pile&nbsp;4.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;three&nbsp;from&nbsp;pile&nbsp;5.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;two&nbsp;from&nbsp;pile&nbsp;3.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;seven&nbsp;from&nbsp;pile&nbsp;2.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;four&nbsp;from&nbsp;pile&nbsp;7.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;eight&nbsp;from&nbsp;pile&nbsp;4.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;eight&nbsp;from&nbsp;pile&nbsp;8.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;nine&nbsp;from&nbsp;pile&nbsp;8.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;king&nbsp;from&nbsp;pile&nbsp;9.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;queen&nbsp;from&nbsp;pile&nbsp;13.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;ace&nbsp;from&nbsp;pile&nbsp;12.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;ten&nbsp;from&nbsp;pile&nbsp;1.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;eight&nbsp;from&nbsp;pile&nbsp;10.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;seven&nbsp;from&nbsp;pile&nbsp;8.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;ten&nbsp;from&nbsp;pile&nbsp;7.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;five&nbsp;from&nbsp;pile&nbsp;10.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;ace&nbsp;from&nbsp;pile&nbsp;5.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;ace&nbsp;from&nbsp;pile&nbsp;1.&nbsp;</tt>
+    <br>
+    <tt>You&nbsp;won!</tt>
+   </p>
+  </blockquote>
+  <p align="justify">
+   The game was won this time. However, here is another game of Perditio
+   Tempus, played by the same program, which was lost. This is because pile 1
+   became empty, but there were still cards left in other piles.
+  </p>
+  <blockquote>
+   <p>
+    <tt>Got&nbsp;jack&nbsp;from&nbsp;pile&nbsp;1.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;jack&nbsp;from&nbsp;pile&nbsp;11.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;three&nbsp;from&nbsp;pile&nbsp;11.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;six&nbsp;from&nbsp;pile&nbsp;3.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;two&nbsp;from&nbsp;pile&nbsp;6.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;ace&nbsp;from&nbsp;pile&nbsp;2.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;nine&nbsp;from&nbsp;pile&nbsp;1.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;king&nbsp;from&nbsp;pile&nbsp;9.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;two&nbsp;from&nbsp;pile&nbsp;13.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;king&nbsp;from&nbsp;pile&nbsp;2.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;ace&nbsp;from&nbsp;pile&nbsp;13.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;three&nbsp;from&nbsp;pile&nbsp;1.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;four&nbsp;from&nbsp;pile&nbsp;3.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;nine&nbsp;from&nbsp;pile&nbsp;4.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;four&nbsp;from&nbsp;pile&nbsp;9.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;four&nbsp;from&nbsp;pile&nbsp;4.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;king&nbsp;from&nbsp;pile&nbsp;4.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;eight&nbsp;from&nbsp;pile&nbsp;13.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;three&nbsp;from&nbsp;pile&nbsp;8.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;ten&nbsp;from&nbsp;pile&nbsp;3.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;queen&nbsp;from&nbsp;pile&nbsp;10.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;jack&nbsp;from&nbsp;pile&nbsp;12.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;four&nbsp;from&nbsp;pile&nbsp;11.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;five&nbsp;from&nbsp;pile&nbsp;4.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;seven&nbsp;from&nbsp;pile&nbsp;5.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;two&nbsp;from&nbsp;pile&nbsp;7.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;queen&nbsp;from&nbsp;pile&nbsp;2.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;ace&nbsp;from&nbsp;pile&nbsp;12.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;five&nbsp;from&nbsp;pile&nbsp;1.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;six&nbsp;from&nbsp;pile&nbsp;5.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;king&nbsp;from&nbsp;pile&nbsp;6.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;seven&nbsp;from&nbsp;pile&nbsp;13.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;queen&nbsp;from&nbsp;pile&nbsp;7.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;ten&nbsp;from&nbsp;pile&nbsp;12.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;nine&nbsp;from&nbsp;pile&nbsp;10.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;six&nbsp;from&nbsp;pile&nbsp;9.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;five&nbsp;from&nbsp;pile&nbsp;6.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;eight&nbsp;from&nbsp;pile&nbsp;5.&nbsp;</tt>
+    <br>
+    <tt>Got&nbsp;ace&nbsp;from&nbsp;pile&nbsp;8.&nbsp;</tt>
+    <br>
+    <tt>Pile&nbsp;1&nbsp;is&nbsp;empty.&nbsp;You&nbsp;lost!</tt>
+   </p>
+  </blockquote>
+  <p align="justify">
+   Your program is very unlikely to produce output exactly like either of these
+   example games. It will depend on how Java chooses random numbers to shuffle
+   the deck.
+  </p>
+  <p>
+   <b>3. Implementation.</b>
+  </p>
+  <p align="justify">
+   Your program will involve Java classes called <tt>Random</tt>,
+   <tt>Card</tt>, <tt>Deck</tt>, <tt>Pile</tt>,
+   <tt>Tableau</tt>, and <tt>Perditio</tt>. Here are brief
+   descriptions of all these classes.
+  </p>
+  <p align="justify">
+   <b>The class <tt>Random</tt>.</b> The Java class library provides
+   a class called <tt>Random</tt> that implements a random number
+   generator. You will use it to help shuffle the deck. To use
+   <tt>Random</tt>, you must put the following line at the start of your
+   program.
+  </p>
+  <blockquote>
+   <p>
+    <tt>import java.util.Random;</tt>
+   </p>
+  </blockquote>
+  <p align="justify">
+   Note that <tt>java</tt> and <tt>util</tt> are in lower case,
+   <tt>Random</tt> begins with an upper case letter, and the line ends
+   with a semicolon. The <tt>import</tt> statement obtains something from
+   the Java library. The library is divided into <i>packages</i> and
+   <i>subpackages.</i> The package <tt>java</tt> contains things that
+   are generally useful when writing Java programs. Its subpackage
+   <tt>util</tt> contains various utilities, one of which is
+   <tt>Random</tt>.
+   <br>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; You need only <tt>Random</tt>’s
+   constructor and its method <tt>nextInt</tt>. The constructor call
+   <tt>new</tt>&nbsp;<tt>Random()</tt> returns a new instance of the
+   class <tt>Random</tt>. If <tt>r</tt> is an instance of
+   <tt>Random</tt>, then <tt>r.nextInt()</tt> returns a randomly
+   generated <tt>int</tt>. It may be negative, and it may have a large
+   absolute value.
+   <br>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For this program, you will need small
+   positive random <tt>int</tt>’s. You can get these by using the
+   Java expression
+   <tt>Math.abs(r.nextInt())</tt>&nbsp;<tt>%</tt>&nbsp;<tt>m</tt>,
+   where <tt>m</tt> returns a positive <tt>int</tt> greater than 0.
+   The expression will return a random <tt>int</tt> greater than equal to
+   0, but less than <tt>m</tt>.
+  </p>
+  <p align="justify">
+   <b>The class <tt>Card</tt>.</b> Each instance of the class
+   <tt>Card</tt> represents a playing card. Source code for this class is
+   available on Moodle. To make your program easier to grade, you must use this
+   source code; you must not modify or extend <tt>Card</tt> in any way.
+   Here is a short description of <tt>Card</tt>’s public methods,
+   and what they do.
+  </p>
+  <blockquote>
+   <dl compact="compact">
+    <dt>
+     <p>
+      <tt>public Card(int rank)</tt>
+     </p>
+    </dt>
+    <dd>
+     <p align="justify">
+      Constructor. Make a new instance of <tt>Card</tt> with a given
+      <tt>rank</tt>, which must be between 1 and 13.
+     </p>
+    </dd>
+    <dt>
+     <p>
+      <tt>public int getRank()</tt>
+     </p>
+    </dt>
+    <dd>
+     <p align="justify">
+      Return the <tt>rank</tt> of this <tt>Card</tt>.
+     </p>
+    </dd>
+    <dt>
+     <p>
+      <tt>public String toString()</tt>
+     </p>
+    </dt>
+    <dd>
+     <p align="justify">
+      Return a <tt>String</tt> that describes this <tt>Card</tt>. It
+      must be used only for printing. For example, it might return
+      <tt>"ace"</tt>, <tt>"two"</tt>, <tt>"queen"</tt>,
+      <tt>"king"</tt>, etc.
+     </p>
+    </dd>
+   </dl>
+  </blockquote>
+  <p align="justify">
+   Note that <tt>Card</tt>’s are immutable objects, so no part of
+   them can be changed after they are created by their constructor.
+  </p>
+  <p align="justify">
+   <b>The class <tt>Deck</tt>.</b> An instance of the class
+   <tt>Deck</tt> represents a deck of <tt>Card</tt>’s. You must
+   write <tt>Deck</tt> yourself. It must have the following methods, and
+   they must work as described here.
+  </p>
+  <blockquote>
+   <dl compact="compact">
+    <dt>
+     <p>
+      <tt>public Deck()</tt>
+     </p>
+    </dt>
+    <dd>
+     <p align="justify">
+      (5 points.) Constructor. Make an array containing 52 different
+      <tt>Card</tt>’s. You must use one or more loops: you will
+      receive no points if you just write 52 assignment statements. The order
+      of <tt>Card</tt>’s within the array does not matter.
+     </p>
+    </dd>
+    <dt>
+     <p>
+      <tt>public Card deal()</tt>
+     </p>
+    </dt>
+    <dd>
+     <p align="justify">
+      (5 points.) Return the next <tt>Card</tt> from the array made by the
+      constructor. You need not pick a <tt>Card</tt> at random, because
+      the <tt>Card</tt>’s in the array will already be shuffled into
+      random order by the time you call <tt>deal</tt>. Throw an
+      <tt>IllegalStateException</tt> if no <tt>Card</tt>’s
+      remain to be dealt from the array. This method must work in
+      <i>O</i>(1) time.
+     </p>
+    </dd>
+    <dt>
+     <p>
+      <tt>public void shuffle()</tt>
+     </p>
+    </dt>
+    <dd>
+     <p align="justify">
+      (10 points.) Shuffle the deck of <tt>Card</tt>’s that is
+      represented by the array you made in the constructor. The easiest way is
+      the
+      <a href="https://en.wikipedia.org/wiki/Fisher-Yates_shuffle">
+       Durstenfeld-Fisher-Yates
+      </a>
+      algorithm, named after its inventors. It exchanges randomly chosen pairs
+      of array elements, and works in <i>O</i>(<i>n</i>) time for an
+      array of size <i>n</i>. You must use the following pseudocode for
+      this algorithm.
+     </p>
+     <ol>
+      <li>
+      <p align="justify">
+       Do steps 2 and 3 for integer values of <i>i</i>, starting from the
+       length of the array minus 1, and ending with 1.
+      </p>
+      </li><li>
+      <p align="justify">
+       Let <i>j</i> be a random integer between 0 and <i>i</i>,
+       inclusive.
+      </p>
+      </li><li>
+      <p align="justify">
+       Exchange the array elements at indexes <i>i</i> and <i>j.</i>
+      </p>
+     </li></ol>
+     <p align="justify">
+      If <tt>shuffle</tt> is called after any <tt>Card</tt>’s
+      have been dealt (by the method <tt>deal</tt>), then it must throw an
+      <tt>IllegalStateException</tt>. You are not allowed to shuffle the
+      deck after dealing has started.
+     </p>
+    </dd>
+   </dl>
+  </blockquote>
+  <p align="justify">
+   To implement <tt>Deck</tt>, you can use ideas from the array stack
+   class that was discussed in the lectures.
+  </p>
+  <p align="justify">
+   <b>The class <tt>Pile</tt>.</b> Each instance of the class
+   <tt>Pile</tt> represents a pile of <tt>Card</tt>’s. You must
+   write <tt>Pile</tt> yourself. It must have the following nested classes
+   and methods, which must work as described here.
+  </p>
+  <blockquote>
+   <dl compact="compact">
+    <dt>
+     <p>
+      <tt>private class Layer</tt>
+     </p>
+    </dt>
+    <dd>
+     <p align="justify">
+      (5 points.) An instance of this class represents a layer in the
+      <tt>Pile</tt>. It must have two slots. One must be called
+      <tt>card</tt>, and it must point to an instance of the class
+      <tt>Card</tt>. The other must be called <tt>next</tt>, and it
+      must point to the next <tt>Layer</tt> in this <tt>Pile</tt>.
+      The class <tt>Layer</tt> must also have a constructor that takes two
+      arguments, called <tt>card</tt> and <tt>next</tt>, which
+      determine the values of the two slots.
+     </p>
+    </dd>
+    <dt>
+     <p>
+      <tt>public Pile()</tt>
+     </p>
+    </dt>
+    <dd>
+     <p align="justify">
+      (2 points.) Constructor. Initialize a new empty <tt>Pile</tt> of
+      <tt>Card</tt>’s.
+     </p>
+    </dd>
+    <dt>
+     <p>
+      <tt>public void add(Card card)</tt>
+     </p>
+    </dt>
+    <dd>
+     <p align="justify">
+      (3 points.) Add <tt>card</tt> on top of this <tt>Pile</tt>.
+     </p>
+    </dd>
+    <dt>
+     <p>
+      <tt>public Card turn()</tt>
+     </p>
+    </dt>
+    <dd>
+     <p align="justify">
+      (3 points.) Turn over a <tt>Card</tt> from the top of this
+      <tt>Pile</tt>. Return the <tt>Card</tt>. Throw an
+      <tt>IllegalStateException</tt> if there are no cards in the
+      <tt>Pile</tt>.
+     </p>
+    </dd>
+    <dt>
+     <p>
+      <tt>public boolean isEmpty()</tt>
+     </p>
+    </dt>
+    <dd>
+     <p align="justify">
+      (2 points.) Test if this <tt>Pile</tt> has no
+      <tt>Card</tt>’s left in it.
+     </p>
+    </dd>
+   </dl>
+  </blockquote>
+  <p align="justify">
+   To implement <tt>Pile</tt>, you can use ideas from the linked stack
+   class that was discussed in the lectures.
+  </p>
+  <p align="justify">
+   <b>The class <tt>Tableau</tt>.</b> Each instance of the class
+   <tt>Tableau</tt> represents thirteen <tt>Pile</tt>’s of
+   <tt>Card</tt>’s, as described previously. You must write
+   <tt>Tableau</tt> yourself. It must have the following methods, which
+   must work as described here.
+  </p>
+  <blockquote>
+   <dl compact="compact">
+    <dt>
+     <p>
+      <tt>public Tableau()</tt>
+     </p>
+    </dt>
+    <dd>
+     <p align="justify">
+      (5 points.) Constructor. Make an array with thirteen empty
+      <tt>Piles</tt> in it (see below). Also make a new instance of
+      <tt>Deck</tt>. Shuffle the <tt>Deck</tt>. Deal four cards from
+      the shuffled <tt>Deck</tt> into each <tt>Pile</tt>.
+     </p>
+    </dd>
+    <dt>
+     <p>
+      <tt>private boolean hasWon()</tt>
+     </p>
+    </dt>
+    <dd>
+     <p align="justify">
+      (5 points.) Test if all thirteen <tt>Pile</tt>’s are empty.
+     </p>
+    </dd>
+    <dt>
+     <p>
+      <tt>public void play()</tt>
+     </p>
+    </dt>
+    <dd>
+     <p align="justify">
+      (10 points.) Play a game of Perditio Tempus. Each time you get a
+      <tt>Card</tt> from a <tt>Pile</tt>, write:
+     </p>
+     <blockquote>
+      <p>
+       <tt>Got</tt>&nbsp;<i>c</i>&nbsp;<tt>from</tt>&nbsp;<tt>pile</tt>&nbsp;<i>p</i><tt>.</tt>
+      </p>
+     </blockquote>
+     <p align="justify">
+      where <i>c</i> is the name of the <tt>Card</tt> and
+      <i>p</i> is the number of the <tt>Pile</tt>. At the end of the
+      game, if the program won, then write:
+     </p>
+     <blockquote>
+      <p>
+       <tt>You</tt>&nbsp;<tt>won!</tt>
+      </p>
+     </blockquote>
+     <p align="justify">
+      If the program lost, then write:
+     </p>
+     <blockquote>
+      <p>
+       <tt>Pile</tt>&nbsp;<i>p</i>&nbsp;<tt>is</tt>&nbsp;<tt>empty.</tt>&nbsp;<tt>You</tt>&nbsp;<tt>lost!</tt>
+      </p>
+     </blockquote>
+     <p align="justify">
+      where <i>p</i> is the number of the empty <tt>Pile</tt> that
+      you tried to get a card from. See the examples for details.
+     </p>
+    </dd>
+   </dl>
+  </blockquote>
+  <p align="justify">
+   In Java, array indexes are numbered starting from 0, but in Perditio Tempus,
+   piles are numbered starting from 1. The easiest way to handle this is to
+   make an array with indexes 0 through 13, and then never use index 0.
+  </p>
+  <p align="justify">
+   <b>The class <tt>Perditio</tt>.</b> (0 points.) This class must
+   contain only the <tt>main</tt> method. It starts the program running.
+   You must write <tt>Perditio</tt> yourself.
+  </p>
+  <p>
+   <b>4. Deliverables.</b>
+  </p>
+  <p align="justify">
+   This project is worth <b>55 points.</b> It will be due in about two
+   weeks, at <b>11:55 <small>PM</small></b> on <b>Wednesday, April
+   18, 2018.</b> Unlike the lab assignments, you are not allowed to work
+   with a partner on this project. Although you can discuss the project in a
+   general way with others, <small>IT MUST BE DONE ENTIRELY BY YOURSELF
+   ALONE</small>!
+   <br>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; You must turn in Java source code for the
+   classes <tt>Card</tt>, <tt>Deck</tt>, <tt>Pile</tt>,
+   <tt>Tableau</tt>, and <tt>Perditio</tt>. You must also turn in as
+   much output as is necessary to convince yourself and the TA’s that
+   your program works correctly. Turn in only one file, containing source code
+   for all five classes. Append the output to the bottom of the file in
+   comments. If you do not know how or where to turn in your work, then ask one
+   of the TA’s.
+  </p>
+ 
+
+</body></html>
