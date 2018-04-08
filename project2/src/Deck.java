@@ -10,8 +10,7 @@ public class Deck {
         deck = new Card[52];
         for(int i = 1; i <= 13; i++) {
             for(int j = 0; j < 4; j++) {
-                deck[count] = new Card(i);
-                count++;
+                deck[count++] = new Card(i);
             }
         }
     }
@@ -29,7 +28,7 @@ public class Deck {
             throw new IllegalStateException("Cannot shuffle after dealing has started");
         } else {
             for(int i = deck.length - 1; i > 0; i--) {
-                int j = Math.abs(rand.nextInt()) % (i + 1);
+                int j = rand.nextInt(i+1);
                 Card temp = deck[i];
                 deck[i] = deck[j];
                 deck[j] = temp;
