@@ -50,11 +50,13 @@ public class Tableau {
         return true;
     }
 
-    public void play() {
+    public boolean play() {
         int p = 1;
         Card card;
         while (true) {
             if (piles[p].isEmpty()) {
+                return p == 1;
+                /*
                 if (hasWon()) {
                     System.out.println("You won!");
                     break;
@@ -62,9 +64,10 @@ public class Tableau {
                     System.out.println("Pile " + p + " is empty. You lost!");
                     break;
                 }
+                */
             } else {
                 card = piles[p].turn();
-                System.out.println("Got a " + card.toString() + " from pile " + p + ".");
+                //System.out.println("Got a " + card.toString() + " from pile " + p + ".");
                 p = card.getRank();
             }
         }
