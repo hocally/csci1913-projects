@@ -12,11 +12,11 @@ class HBST<Key, Value> {
 	}
 
 	private class TreeNode {
-		int key;
+		Key key;
 		ValueNode value;
 		TreeNode left, right;
 
-		public TreeNode(int key, ValueNode value, TreeNode left, TreeNode right) {
+		public TreeNode(Key key, ValueNode value, TreeNode left, TreeNode right) {
 			this.key = key;
 			this.value = value;
 			this.left = left;
@@ -24,23 +24,97 @@ class HBST<Key, Value> {
 		}
 	}
 
-	public HBST() {
+	private TreeNode head;
+	private TreeNode root;
 
+	public HBST() {
+		head = new TreeNode(null, null, null, null);
+		root = null;
 	}
 
 	public Value get(Key key) {
-
+		TreeNode subtree = root;
+		int hashedKey = hash(key);
+		while(subtree != null) {
+			int test = hashedKey - hash(subtree.key);
+			if(test < 0) {
+				subtree = subtree.left;
+			} else if(test > 0) {
+				subtree = subtree.right;
+			} else {
+				ValueNode temp = subtree.value;
+				while(temp != null) {
+					if(hash(temp.key) == hashedKey) {
+						return temp.value;
+					} else {
+						temp = temp.next;
+					}
+				}
+			}
+		}
+		throw new IllegalArgumentException("No such key");
 	}
 
 	private int hash(Key key) {
-
+		if(key != null) {
+			return Math.abs(key.hashCode() % 99257);
+		} else {
+			return 0;
+		}
 	}
 
 	public int height() {
-
+		return heighting(root);
 	}
 
 	public void put(Key key, Value value) {
+		if (root == null) {
+			root = new TreeNode(key, new ValueNode(key, value, null), null, null);
+		} else {
+			TreeNode subtree = root;
+			int hashedKey = hash(key);
+			while(true) {
+				int test = hashedKey - hash(subtree.key);
+				if(test < 0) {
+					if (subtree.left == null) {
+						subtree.left = new TreeNode(key, new ValueNode(key, value, null), null, null);
+						return;
+					} else {
+						subtree = subtree.left;
+					}
+				} else if (test > 0) {
+					if (subtree.right == null) {
+						subtree.right = new TreeNode(key, new ValueNode(key, value, null), null, null);
+						return;
+					} else {
+						subtree = subtree.right;
+					}
+				} else {
+					ValueNode temp = subtree.value;
+					while(true) {
+						if(temp.next == null) {
+							temp.next = new ValueNode(key, value, null);
+							return;
+						} else {
+							temp = temp.next;
+						}
+					}
+				}
+			}
+		}
+	}
 
+	private int heighting(TreeNode root) {
+		if(root == null) {
+			return 0;
+		} else {
+			int left = heighting(root.left);
+			int right = heighting(root.right);
+			if(left > right) {
+				return left + 1;
+			} else {
+				return right + 1;
+			}
+		}
 	}
 }
