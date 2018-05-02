@@ -8,7 +8,7 @@ class HBSTifier
 	  	"false",        "final",        "finally",     "float",  
 		"for",          "goto",         "if",          "implements",  
 		"import",       "instanceof",   "int",         "interface",  
-		"long",         "native",       "new",         null,
+		"long",         "native",       "new",         "null",
 		"package",      "private",      "protected",   "public",  
 		"return",       "short",        "static",      "super",  
 		"switch",       "synchronized", "this",        "throw",  
