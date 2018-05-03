@@ -57,7 +57,7 @@ class HBST<Key, Value> {
 
 	private int hash(Key key) {
 		if(key != null) {
-			return Math.abs(key.hashCode());
+			return Math.abs(key.hashCode() % 99257);
 		} else {
 			return 0;
 		}
