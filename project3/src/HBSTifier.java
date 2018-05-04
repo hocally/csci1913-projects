@@ -13,7 +13,8 @@ class HBSTifier
 		"return",       "short",        "static",      "super",  
 		"switch",       "synchronized", "this",        "throw",  
 		"throws",       "transient",    "true",        "try",  
-		"var",          "void",         "volatile",    "while" };
+		"var",          "void",         "volatile",    "while",
+	 	"abstract", 	"null", 		"15",			"csci-1913" };
 	
 	public static void main(String [] args){  
 		HBST<String, Integer> hbst = new HBST<String, Integer>();  
@@ -24,7 +25,7 @@ class HBSTifier
 
 		System.out.println(hbst.height());
 		for (int index = 0; index < keys.length; index += 1) {
-			System.out.format("%02d %s", hbst.get(keys[index]), keys[index]);  
+			System.out.format("%02d %s", hbst.get(keys[index]), keys[index]);
 			System.out.println();  
 		}  
 	}  
