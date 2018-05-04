@@ -57,7 +57,11 @@ class HBST<Key, Value> {
 
 	private int hash(Key key) {
 		if(key != null) {
+<<<<<<< HEAD
 			return Math.abs(key.hashCode() % 99257);
+=======
+			return Math.abs(key.hashCode());
+>>>>>>> parent of 34a33e5... Current Final
 		} else {
 			return 0;
 		}
